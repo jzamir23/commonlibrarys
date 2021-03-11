@@ -1,0 +1,30 @@
+*.iml
+.gradle
+gradlew
+gradlew.bat
+build
+gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+reports
+jacoco.exec
+
+# files for the dex VM（dex包文件）
+*.dex
+# Java class files（java编译的class字节码文件）
+*.class
+# IntelliJ IDEA(IDE相关的设置)
+.idea
+*.ipr
+*.iws

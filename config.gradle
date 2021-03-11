@@ -1,0 +1,42 @@
+ext {
+
+    def nav_version = "2.3.3"
+
+    android = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.3",
+            applicationId    : "com.macwz.jzproject",
+            minSdkVersion    : 21,
+            targetSdkVersion : 29,
+            versionCode      : 110,
+            versionName      : "1.1.0",
+    ]
+
+    dependencies = [
+            "navigation-fragment"        : "androidx.navigation:navigation-fragment-ktx:$nav_version",
+            "navigation-ui"              : "androidx.navigation:navigation-ui-ktx:$nav_version",
+            "navigation-dynamic-fragment": "androidx.navigation:navigation-dynamic-features-fragment:$nav_version", //Dynamic: Feature: Module: Support
+
+            "gson"                       : 'com.google.code.gson:gson:2.8.5',                        //gson解析
+            "retrofit"                   : "com.squareup.retrofit2:retrofit:2.3.0",                  //retrofit2.9
+            "adapter-rxjava"             : 'com.squareup.retrofit2:adapter-rxjava2:2.3.0',           //配合Rxjava: 使用
+            "converter-gson"             : 'com.squareup.retrofit2:converter-gson:2.1.0',            //ConverterFactory的Gson:
+            "rxjava"                     : 'io.reactivex.rxjava2:rxjava:2.2.3',                      //rxjava
+            "rxandroid"                  : 'io.reactivex.rxjava2:rxandroid:2.0.1',                   //rxandroid: 线程调度
+            "rxbinding"                  : "com.jakewharton.rxbinding2:rxbinding:2.1.1",             //rxbinding用来防止点击过快
+            "glide"                      : 'com.github.bumptech.glide:glide:4.9.0',                  //Glide: 图片框架
+            "androidx-appcompat"         : 'androidx.appcompat:appcompat:1.0.2',                     //SmartRefreshLayout: 刷新框架 必须: 1.0.0: 以上
+            "scwang-refresh-kernel"      : 'com.scwang.smart:refresh-layout-kernel:2.0.1',           //核心必须依赖
+            "debug-leakcanary"           : 'com.squareup.leakcanary:leakcanary-android:2.3',         // 内存泄漏
+            "multidex"                   : 'androidx.multidex:multidex:2.0.1',                       // App体积大使用多包
+            "logger"                     : 'com.squareup.okhttp3:logging-interceptor:3.11.0',        //okhttp log 拦截器
+            "jsbridge"                   : 'com.github.lzyzsd:jsbridge:1.0.4',                       //jsbridge 与Web联调
+            "banner"                     : 'com.youth.banner:banner:2.1.0',                          //banner
+
+            "test-junit"                 : 'junit:junit:4.13.2',
+            "test-ext-junit"             : 'androidx.test.ext:junit:1.1.2',
+            "test-espresso-core"         : 'androidx.test.espresso:espresso-core:3.3.0',
+            "alibaba-arouter-api"        : 'com.alibaba:arouter-api:1.5.0',
+            "alibaba-arouter-compiler"   : 'com.alibaba:arouter-compiler:1.2.2'
+    ]
+}

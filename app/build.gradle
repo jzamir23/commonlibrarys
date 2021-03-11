@@ -1,0 +1,119 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
+        flavorDimensions 'Jz'
+    }
+
+    signingConfigs {
+        config {
+            keyAlias project.KEY_ALIAS
+            keyPassword project.KEY_PASSWORD
+            storeFile file(project.STORE_FILE)
+            storePassword project.STORE_PASSWORD
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true //代码混淆开关
+            zipAlignEnabled true//压缩对齐开关
+            shrinkResources true// 移除无用的资源
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            ndk {
+                // abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+                // armeabi：万金油架构平台（占用率：0%）
+                // armeabi-v7a：曾经主流的架构平台（占用率：10%）
+                // arm64-v8a：目前主流架构平台（占用率：95%）
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
+            }
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            // 调试模式下只保留一种架构的 so 库，提升打包速度
+            ndk {
+                abiFilters 'armeabi-v7a'
+            }
+        }
+
+        applicationVariants.all { variant ->
+            variant.outputs.all {//自定义文件包名 jzProjectStg-v1.1.0-debug-2103111046.apk
+                //outputFileName = "jzProject${variant.productFlavors[0].name}-v${defaultConfig.versionName}-${variant.buildType.name}-${apkTime()}.apk"
+                outputFileName = "jzProject${variant.productFlavors[0].name}-${variant.buildType.name}.apk"
+            }
+        }
+    }
+
+    flavorDimensions 'Jz'
+    productFlavors {
+        Stg {
+            dimension = 'Jz'
+        }
+
+        Pro {
+            dimension = 'Jz'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+}
+
+static def apkTime() {
+    return new Date().format('yyMMddHHmm', TimeZone.getDefault())
+}
+
+dependencies {
+    testImplementation(rootProject.ext.dependencies["test-junit"])
+    androidTestImplementation(rootProject.ext.dependencies["test-ext-junit"])
+    androidTestImplementation(rootProject.ext.dependencies["test-espresso-core"])
+    implementation project(path: ':module_common')
+    if (!isModule.toBoolean()) {
+        implementation project(path: ':module_my')
+        implementation project(path: ':module_home')
+    }
+    kapt(rootProject.ext.dependencies["alibaba-arouter-compiler"])
+}
