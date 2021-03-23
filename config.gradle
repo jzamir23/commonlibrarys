@@ -32,11 +32,12 @@ ext {
             "logger"                     : 'com.squareup.okhttp3:logging-interceptor:3.11.0',        //okhttp log 拦截器
             "jsbridge"                   : 'com.github.lzyzsd:jsbridge:1.0.4',                       //jsbridge 与Web联调
             "banner"                     : 'com.youth.banner:banner:2.1.0',                          //banner
+            "mmkv"                       : 'com.tencent:mmkv-static:1.2.7',                          //微信数据存储框架
 
             "test-junit"                 : 'junit:junit:4.13.2',
             "test-ext-junit"             : 'androidx.test.ext:junit:1.1.2',
             "test-espresso-core"         : 'androidx.test.espresso:espresso-core:3.3.0',
-            "alibaba-arouter-api"        : 'com.alibaba:arouter-api:1.5.0',
-            "alibaba-arouter-compiler"   : 'com.alibaba:arouter-compiler:1.2.2'
+            "alibaba-arouter-api"        : 'com.alibaba:arouter-api:1.5.0',                         //阿里路由器api
+            "alibaba-arouter-compiler"   : 'com.alibaba:arouter-compiler:1.2.2'                     //阿里路由器compiler
     ]
 }

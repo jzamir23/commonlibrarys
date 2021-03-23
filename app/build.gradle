@@ -110,10 +110,13 @@ dependencies {
     testImplementation(rootProject.ext.dependencies["test-junit"])
     androidTestImplementation(rootProject.ext.dependencies["test-ext-junit"])
     androidTestImplementation(rootProject.ext.dependencies["test-espresso-core"])
-    implementation project(path: ':module_common')
+    implementation project(path: ':commonlibrarys')
+    implementation project(path: ':common_router')
     if (!isModule.toBoolean()) {
-        implementation project(path: ':module_my')
         implementation project(path: ':module_home')
+        implementation project(path: ':module_login')
+        implementation project(path: ':module_work')
+        implementation project(path: ':module_my')
     }
     kapt(rootProject.ext.dependencies["alibaba-arouter-compiler"])
 }

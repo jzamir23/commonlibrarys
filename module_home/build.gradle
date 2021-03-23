@@ -19,6 +19,7 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "boolean", "isModule", isModule
     }
 
     sourceSets {
@@ -56,6 +57,7 @@ dependencies {
     testImplementation(rootProject.ext.dependencies["test-junit"])
     androidTestImplementation(rootProject.ext.dependencies["test-ext-junit"])
     androidTestImplementation(rootProject.ext.dependencies["test-espresso-core"])
-    implementation project(path: ':module_common')
+    implementation project(path: ':commonlibrarys')
+    implementation project(path: ':common_router')
     kapt(rootProject.ext.dependencies["alibaba-arouter-compiler"])
 }

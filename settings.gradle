@@ -1,5 +1,8 @@
+include ':commonlibrarys'
+include ':common_router'
 include ':module_home'
+include ':module_login'
 include ':module_my'
-include ':module_common'
+include ':module_work'
 include ':app'
 rootProject.name = "JzProject"
