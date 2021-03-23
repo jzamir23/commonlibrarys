@@ -16,11 +16,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.macwz.common.router.RouterPath
-import com.macwz.common.router.provider.IWorkService
 import com.macwz.common.router.ARouterUtils
+import com.macwz.common.router.RouterPath
 import com.macwz.common.router.provider.IHomeService
-import com.macwz.common.router.provider.ILoginService
 import com.macwz.commonlibrarys.utils.SpUtils
 import com.macwz.module_login.R
 import com.macwz.module_login.data.model.LoggedInUser
@@ -105,6 +103,7 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 showLoginSuccess("success")
                 ARouterUtils.getComponentService<IHomeService>(RouterPath.HOME_SERVICE)?.toHome("")
+                finish()
             }
         }
 

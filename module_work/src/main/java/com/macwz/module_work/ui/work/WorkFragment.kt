@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.macwz.common.router.RouterPath
-import com.macwz.common.router.provider.IHomeService
 import com.macwz.common.router.ARouterUtils
-import com.macwz.common.router.provider.IMyService
 import com.macwz.module_work.R
 
 class WorkFragment : Fragment() {
@@ -31,8 +28,7 @@ class WorkFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(WorkViewModel::class.java)
         view?.findViewById<TextView>(R.id.message)?.setOnClickListener {
-            ARouterUtils.getComponentService<IMyService>(RouterPath.MY_SERVICE)?.toMy("")
-
+            ARouterUtils.startMyActivity(requireActivity(), "")
         }
     }
 
