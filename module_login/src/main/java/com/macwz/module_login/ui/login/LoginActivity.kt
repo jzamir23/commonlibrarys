@@ -19,7 +19,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.macwz.common.router.ARouterUtils
 import com.macwz.common.router.RouterPath
 import com.macwz.common.router.provider.IHomeService
-import com.macwz.commonlibrarys.utils.SpUtils
+import com.macwz.commonlibrarys.utils.MmkvUtils
+import com.macwz.commonlibrarys.utils.ext.afterTextChange
 import com.macwz.module_login.R
 import com.macwz.module_login.data.model.LoggedInUser
 
@@ -73,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         })
 
-        username.afterTextChanged {
+        username.afterTextChange {
             loginViewModel.loginDataChanged(
                 username.text.toString(),
                 password.text.toString()
@@ -81,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         password.apply {
-            afterTextChanged {
+            afterTextChange {
                 loginViewModel.loginDataChanged(
                     username.text.toString(),
                     password.text.toString()
@@ -103,7 +104,6 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 showLoginSuccess("success")
                 ARouterUtils.getComponentService<IHomeService>(RouterPath.HOME_SERVICE)?.toHome("")
-                finish()
             }
         }
 
@@ -114,12 +114,12 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val lu = LoggedInUser("ididid", "nanana")
-        Log.i("22222", "${SpUtils.putParcelable("s3", lu)}")
-        Log.i("22222", "${SpUtils.getParcelable("s3", LoggedInUser::class.java)}")
-        Log.i("22222", "${SpUtils.putStringSet("s4", stringSet)}")
-        Log.i("22222", "${SpUtils.getStringSet("s4")}")
-        Log.i("22222", "${SpUtils.putDouble("s5", 10.9)}")
-        Log.i("22222", "${SpUtils.getDouble("s5")}")
+        Log.i("22222", "${MmkvUtils.putParcelable("s3", lu)}")
+        Log.i("22222", "${MmkvUtils.getParcelable("s3", LoggedInUser::class.java)}")
+        Log.i("22222", "${MmkvUtils.putStringSet("s4", stringSet)}")
+        Log.i("22222", "${MmkvUtils.getStringSet("s4")}")
+        Log.i("22222", "${MmkvUtils.putDouble("s5", 10.9)}")
+        Log.i("22222", "${MmkvUtils.getDouble("s5")}")
 
     }
 
@@ -141,19 +141,4 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoginSuccess(msg: String) {
         Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
     }
-}
-
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
 }

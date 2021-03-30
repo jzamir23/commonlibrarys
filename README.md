@@ -1,4 +1,4 @@
-Kotlin Projcet Design ：MVVM+Retrofit+OkHttp+Rxjava
-Google Jetpack ：DataBinding+LiveData+ViewModel+Room+Lifecycle+Navigation
+Kotlin Project Design ：MVVM+Retrofit+Coroutines
+Google JetPack ：DataBinding+LiveData+ViewModel+Room+Lifecycle+Navigation
 
-home, work, my, msg
+组件化：module_home, module_login, module_work, module_my

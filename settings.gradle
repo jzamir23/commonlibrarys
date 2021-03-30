@@ -1,3 +1,4 @@
+include ':commonbase'
 include ':commonlibrarys'
 include ':common_router'
 include ':module_home'

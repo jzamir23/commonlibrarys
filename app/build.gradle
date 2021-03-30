@@ -84,6 +84,9 @@ android {
             dirs 'libs'
         }
     }
+    buildFeatures {
+        dataBinding = true
+    }
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -110,6 +113,7 @@ dependencies {
     testImplementation(rootProject.ext.dependencies["test-junit"])
     androidTestImplementation(rootProject.ext.dependencies["test-ext-junit"])
     androidTestImplementation(rootProject.ext.dependencies["test-espresso-core"])
+    implementation project(path: ':commonbase')
     implementation project(path: ':commonlibrarys')
     implementation project(path: ':common_router')
     if (!isModule.toBoolean()) {

@@ -11,7 +11,7 @@ import com.macwz.module_login.data.Result
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
-    val loginFormState: LiveData<LoginFormState> = _loginForm
+    val loginFormState: LiveData<LoginFormState> = _loginForm//避免返回的MutableLiveData被外部更改，故返回类型改为LiveData
 
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult

@@ -17,6 +17,10 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
+    buildFeatures {
+        dataBinding = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -43,10 +47,35 @@ dependencies {
     api 'androidx.appcompat:appcompat:1.2.0'
     api 'com.google.android.material:material:1.2.1'
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
-    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    // lifecycle
+    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
+    api 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    // viewModel
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    api 'androidx.fragment:fragment-ktx:1.2.5'
+    // liveData
+    api 'com.kunminx.archi:unpeek-livedata:4.4.1-beta1'
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    // Cookie自动持久化
+    api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+    //retrofit
+    api "com.squareup.retrofit2:retrofit:2.9.0"
+    api "com.squareup.retrofit2:converter-gson:2.9.0"
+    //动态替换BaseUrl库 使用可参考 https://github.com/JessYanCoding/RetrofitUrlManager
+    api 'me.jessyan:retrofit-url-manager:1.4.0'
+    //dialog
+    api "com.afollestad.material-dialogs:lifecycle:3.3.0"
+    api "com.afollestad.material-dialogs:core:3.3.0"
+    api "com.afollestad.material-dialogs:color:3.3.0"
+    api "com.afollestad.material-dialogs:datetime:3.3.0"
+    api "com.afollestad.material-dialogs:bottomsheets:3.3.0"
+    //util
+    api 'com.blankj:utilcodex:1.29.0'
+    // navigation
     api(rootProject.ext.dependencies["navigation-ui"])
     api(rootProject.ext.dependencies["navigation-fragment"])
+    //
     api(rootProject.ext.dependencies["mmkv"])
     api(rootProject.ext.dependencies["gson"])
 }

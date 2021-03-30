@@ -1,7 +1,7 @@
 package com.macwz.jzproject
 
 import com.alibaba.android.arouter.launcher.ARouter
-import com.macwz.commonlibrarys.BaseApp
+import com.macwz.commonlibrarys.base.BaseApp
 
 class MainApplication : BaseApp() {
     override fun onCreate() {
