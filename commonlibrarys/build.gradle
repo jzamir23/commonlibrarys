@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-kapt'
 }
 
+apply plugin: 'maven'
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -34,6 +36,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    android.libraryVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "commonlibrarys-${defaultConfig.versionName}.aar"
+        }
+    }
+
     kapt {
         arguments {
             arg("AROUTER_MODULE_NAME", project.getName())
@@ -78,4 +87,14 @@ dependencies {
     //
     api(rootProject.ext.dependencies["mmkv"])
     api(rootProject.ext.dependencies["gson"])
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        //本地仓库路径
+        repository(url: "file:/Users/wenze/AndroidStudioProjects/JzProject/commonlibrarys/")
+        pom.groupId = "com.macwz"
+        pom.artifactId = "commonlibrarys"
+        pom.version = "1.2.0"
+    }
 }

@@ -37,13 +37,15 @@
         tools:replace="android:allowBackup,android:supportsRtl"
         tools:targetApi="n"
         android:theme="@style/Theme.JzProject">
-        <activity android:name=".MainActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity"/>
 
         <meta-data
             android:name="UMENG_CHANNEL"

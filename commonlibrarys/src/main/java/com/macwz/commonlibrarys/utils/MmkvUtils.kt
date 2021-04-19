@@ -17,19 +17,19 @@ object MmkvUtils {
         mmkv?.encode(key, value)
     }
 
-    fun getDouble(key: String) = mmkv?.decodeDouble(key, 0.00)
+    fun getDouble(key: String) = mmkv?.decodeDouble(key, 0.00)?:0.00
 
     fun putLong(key: String, value: Long) {
         mmkv?.encode(key, value)
     }
 
-    fun getLong(key: String) = mmkv?.decodeLong(key, 0L)
+    fun getLong(key: String) = mmkv?.decodeLong(key, 0L)?:0L
 
     fun putBoolean(key: String, value: Boolean) {
         mmkv?.encode(key, value)
     }
 
-    fun getBoolean(key: String) = mmkv?.decodeBool(key, false)
+    fun getBoolean(key: String, defaultValue:Boolean) = mmkv?.decodeBool(key, defaultValue)?:defaultValue
 
     fun putInt(key: String, value: Int) {
         mmkv?.encode(key, value)
