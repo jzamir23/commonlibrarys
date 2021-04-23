@@ -90,7 +90,7 @@ dependencies {
     api(rootProject.ext.dependencies["gson"])
 }
 
-uploadArchives {
+//uploadArchives {
 //    repositories.mavenDeployer {
 //        //本地仓库路径
 //        repository(url: "file:/Users/wenze/AndroidStudioProjects/JzProject/commonlibrarys/")
@@ -98,4 +98,4 @@ uploadArchives {
 //        pom.artifactId = "commonlibrarys"
 //        pom.version = "1.2.0"
 //    }
-}
+//}
