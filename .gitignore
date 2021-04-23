@@ -3,7 +3,6 @@
 gradlew
 gradlew.bat
 build
-gradle
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -28,5 +27,5 @@ jacoco.exec
 .idea
 *.ipr
 *.iws
-screenMatch.properties
-screenMatch_example_dimens.xml
+/screenMatch.properties
+/screenMatch_example_dimens.xml
