@@ -28,3 +28,5 @@ jacoco.exec
 .idea
 *.ipr
 *.iws
+screenMatch.properties
+screenMatch_example_dimens.xml
