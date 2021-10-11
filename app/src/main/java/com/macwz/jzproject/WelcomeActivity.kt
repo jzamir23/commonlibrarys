@@ -28,7 +28,7 @@ class WelcomeActivity : BaseActivity<BaseViewModel, ActivityWelcomeBinding>() {
         mDatabind.click = ProxyClick()
         //mDatabind.welcomeBaseview.setBackgroundColor(SettingUtil.getColor(this))
         mViewPager = findViewById(R.id.banner_view)
-        if (MmkvUtils.getBoolean("first", true)) {
+        if (MmkvUtils.getBoolean("first", true) == true) {
             //是第一次打开App 显示引导页
             mDatabind.welcomeImage.gone()
             mViewPager.apply {

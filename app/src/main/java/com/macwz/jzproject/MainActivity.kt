@@ -35,6 +35,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun createObserver() {
+
+
     }
 
     override fun onNetworkStateChanged(netState: NetState) {
