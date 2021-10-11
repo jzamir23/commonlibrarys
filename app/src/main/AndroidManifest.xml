@@ -37,7 +37,8 @@
         tools:replace="android:allowBackup,android:supportsRtl"
         tools:targetApi="n"
         android:theme="@style/Theme.JzProject">
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".WelcomeActivity"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

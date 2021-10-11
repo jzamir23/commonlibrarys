@@ -23,13 +23,11 @@ class MyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.my_fragment, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
-        view?.findViewById<TextView>(R.id.message)?.setOnClickListener {
-            ARouterUtils.startHomeActivity(requireActivity(),"")
+        view.findViewById<TextView>(R.id.message)?.setOnClickListener {
+            ARouterUtils.startHomeActivity(requireActivity(), "")
         }
     }
-
 }

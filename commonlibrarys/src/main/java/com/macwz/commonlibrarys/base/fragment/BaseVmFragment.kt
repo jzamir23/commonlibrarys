@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.macwz.commonlibrarys.base.viewmodel.BaseViewModel
@@ -101,13 +100,13 @@ abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
         if (lifecycle.currentState == Lifecycle.State.STARTED && isFirst) {
             // 延迟加载 防止 切换动画还没执行完毕时数据就已经加载好了，这时页面会有渲染卡顿
             viewLifecycleOwner.lifecycleScope.launch {
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     delay(lazyLoadTime())
                     lazyLoadData()
                     //在Fragment中，只有懒加载过了才能开启网络变化监听
-                    NetworkStateManager.instance.mNetworkStateCallback.observeInFragment(
+                    NetworkStateManager.instance.mNetworkStateCallback.observe(
                         this@BaseVmFragment,
-                        Observer {
+                        {
                             //不是首次订阅时调用方法，防止数据第一次监听错误
                             if (!isFirst) {
                                 onNetworkStateChanged(it)
@@ -132,10 +131,10 @@ abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
      * 注册 UI 事件
      */
     private fun registorDefUIChange() {
-        mViewModel.loadingChange.showDialog.observeInFragment(this, Observer {
+        mViewModel.loadingChange.showDialog.observe(this, {
             showLoading(it)
         })
-        mViewModel.loadingChange.dismissDialog.observeInFragment(this, Observer {
+        mViewModel.loadingChange.dismissDialog.observe(this, {
             dismissLoading()
         })
     }
@@ -147,11 +146,11 @@ abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
     protected fun addLoadingObserve(vararg viewModels: BaseViewModel) {
         viewModels.forEach { viewModel ->
             //显示弹窗
-            viewModel.loadingChange.showDialog.observeInFragment(this, Observer {
+            viewModel.loadingChange.showDialog.observe(this, {
                 showLoading(it)
             })
             //关闭弹窗
-            viewModel.loadingChange.dismissDialog.observeInFragment(this, Observer {
+            viewModel.loadingChange.dismissDialog.observe(this, {
                 dismissLoading()
             })
         }
