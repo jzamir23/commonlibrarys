@@ -1219,6 +1219,7 @@ public final class ImageUtils {
      * @param isReturnScale True to return the scale blur bitmap, false otherwise.
      * @return the blur bitmap
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static Bitmap fastBlur(final Bitmap src,
                                   @FloatRange(
                                           from = 0, to = 1, fromInclusive = false

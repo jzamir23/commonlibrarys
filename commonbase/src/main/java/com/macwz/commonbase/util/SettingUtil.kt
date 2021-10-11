@@ -3,17 +3,13 @@ package com.macwz.commonbase.util
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
-import android.os.Build
-import android.preference.PreferenceManager
 import android.view.View
-import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.Utils
 import com.macwz.commonbase.R
-import com.tencent.mmkv.MMKV
+import com.macwz.commonlibrarys.utils.MmkvUtils
 import java.lang.reflect.InvocationTargetException
 import kotlin.math.roundToInt
 
@@ -24,9 +20,8 @@ object SettingUtil {
      * 获取当前主题颜色
      */
     fun getColor(context: Context): Int {
-        val setting = PreferenceManager.getDefaultSharedPreferences(context)
         val defaultColor = ContextCompat.getColor(context, R.color.colorPrimary)
-        val color = setting.getInt("color", defaultColor)
+        val color = MmkvUtils.getInt("color") ?: defaultColor
         return if (color != 0 && Color.alpha(color) != 255) {
             defaultColor
         } else {
@@ -39,40 +34,40 @@ object SettingUtil {
      * 设置主题颜色
      */
     fun setColor(context: Context, color: Int) {
-        val setting = PreferenceManager.getDefaultSharedPreferences(context)
-        setting.edit().putInt("color", color).apply()
+        MmkvUtils.putInt("color", color)
     }
 
     /**
      * 获取列表动画模式
      */
     fun getListMode(): Int {
-        val kv = MMKV.mmkvWithID("app")
         //0 关闭动画 1.渐显 2.缩放 3.从下到上 4.从左到右 5.从右到左
-        return kv!!.decodeInt("mode", 2)
+        return MmkvUtils.getInt("mode") ?: 2
     }
+
     /**
      * 设置列表动画模式
      */
     fun setListMode(mode: Int) {
-        val kv = MMKV.mmkvWithID("app")
-         kv!!.encode("mode", mode)
+        MmkvUtils.putInt("mode", mode)
     }
+
     /**
      * 获取是否请求置顶文章
      */
-    fun getRequestTop(context: Context): Boolean {
-        val setting = PreferenceManager.getDefaultSharedPreferences(context)
-        return setting.getBoolean("top", true)
+    fun getRequestTop(): Boolean {
+        return MmkvUtils.getBoolean("top", true) ?: true
     }
 
     fun getColorStateList(context: Context): ColorStateList {
-        val colors = intArrayOf(getColor(context), ContextCompat.getColor(context, R.color.colorGray))
+        val colors =
+            intArrayOf(getColor(context), ContextCompat.getColor(context, R.color.colorGray))
         val states = arrayOfNulls<IntArray>(2)
         states[0] = intArrayOf(android.R.attr.state_checked, android.R.attr.state_checked)
         states[1] = intArrayOf()
         return ColorStateList(states, colors)
     }
+
     fun getColorStateList(color: Int): ColorStateList {
         val colors = intArrayOf(color, ContextCompat.getColor(Utils.getApp(), R.color.colorGray))
         val states = arrayOfNulls<IntArray>(2)
@@ -126,18 +121,30 @@ object SettingUtil {
         val mySelectorGrad = view.background as StateListDrawable
         try {
             val slDraClass = StateListDrawable::class.java
-            val getStateCountMethod = slDraClass.getDeclaredMethod("getStateCount", *arrayOfNulls(0))
-            val getStateSetMethod = slDraClass.getDeclaredMethod("getStateSet", Int::class.javaPrimitiveType)
-            val getDrawableMethod = slDraClass.getDeclaredMethod("getStateDrawable", Int::class.javaPrimitiveType)
+            val getStateCountMethod =
+                slDraClass.getDeclaredMethod("getStateCount", *arrayOfNulls(0))
+            val getStateSetMethod =
+                slDraClass.getDeclaredMethod("getStateSet", Int::class.javaPrimitiveType)
+            val getDrawableMethod =
+                slDraClass.getDeclaredMethod("getStateDrawable", Int::class.javaPrimitiveType)
             val count = getStateCountMethod.invoke(mySelectorGrad) as Int//对应item标签
             for (i in 0 until count) {
-                val stateSet = getStateSetMethod.invoke(mySelectorGrad, i) as IntArray//对应item标签中的 android:state_xxxx
+                val stateSet = getStateSetMethod.invoke(
+                    mySelectorGrad,
+                    i
+                ) as IntArray//对应item标签中的 android:state_xxxx
                 if (stateSet.isEmpty()) {
-                    val drawable = getDrawableMethod.invoke(mySelectorGrad, i) as GradientDrawable//这就是你要获得的Enabled为false时候的drawable
+                    val drawable = getDrawableMethod.invoke(
+                        mySelectorGrad,
+                        i
+                    ) as GradientDrawable//这就是你要获得的Enabled为false时候的drawable
                     drawable.setColor(yesColor)
                 } else {
                     for (j in stateSet.indices) {
-                        val drawable = getDrawableMethod.invoke(mySelectorGrad, i) as GradientDrawable//这就是你要获得的Enabled为false时候的drawable
+                        val drawable = getDrawableMethod.invoke(
+                            mySelectorGrad,
+                            i
+                        ) as GradientDrawable//这就是你要获得的Enabled为false时候的drawable
                         drawable.setColor(noColor)
                     }
                 }

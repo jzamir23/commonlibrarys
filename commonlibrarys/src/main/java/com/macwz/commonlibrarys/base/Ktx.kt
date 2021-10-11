@@ -7,16 +7,10 @@ import android.content.IntentFilter
 import android.database.Cursor
 import android.net.ConnectivityManager
 import android.net.Uri
-import android.service.autofill.UserData
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.macwz.commonlibrarys.common.lifecycle.KtxAppLifeObserver
 import com.macwz.commonlibrarys.common.lifecycle.KtxLifeCycleCallBack
 import com.macwz.commonlibrarys.network.manager.NetworkStateReceive
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 
 val appContext: Application by lazy { Ktx.app }
 

@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31"
     testImplementation(rootProject.ext.dependencies["test-junit"])
     androidTestImplementation(rootProject.ext.dependencies["test-ext-junit"])
     androidTestImplementation(rootProject.ext.dependencies["test-espresso-core"])

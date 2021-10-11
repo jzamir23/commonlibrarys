@@ -23,11 +23,10 @@ class WorkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.work_fragment, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(WorkViewModel::class.java)
-        view?.findViewById<TextView>(R.id.message)?.setOnClickListener {
+        view.findViewById<TextView>(R.id.message)?.setOnClickListener {
             ARouterUtils.startMyActivity(requireActivity(), "")
         }
     }
